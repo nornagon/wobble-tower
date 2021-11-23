@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Logo.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Splash.gd" type="Script" id=2]
+[ext_resource path="res://Theme.tres" type="Theme" id=3]
+
+[sub_resource type="InputEventAction" id=6]
+action = "ui_select"
+
+[sub_resource type="ShortCut" id=7]
+shortcut = SubResource( 6 )
+
+[node name="Splash" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 3 )
+script = ExtResource( 2 )
+
+[node name="Button" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -218.5
+margin_top = -141.5
+margin_right = 218.5
+margin_bottom = -98.5
+shortcut = SubResource( 7 )
+text = "PRESS SPACE TO START"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Logo" parent="." instance=ExtResource( 1 )]
+position = Vector2( 350, 500 )
+
+[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]

@@ -1,0 +1,165 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://Main.gd" type="Script" id=1]
+[ext_resource path="res://ShapeT.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Abstract Platformer (370 assets)/PNG/Tiles/Yellow tiles/tileYellow_01.png" type="Texture" id=3]
+[ext_resource path="res://Abstract Platformer (370 assets)/PNG/Tiles/Yellow tiles/tileYellow_02.png" type="Texture" id=4]
+[ext_resource path="res://Splash.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Theme.tres" type="Theme" id=7]
+[ext_resource path="res://ShapeL.tscn" type="PackedScene" id=8]
+[ext_resource path="res://ShapeI.tscn" type="PackedScene" id=9]
+[ext_resource path="res://ShapeS.tscn" type="PackedScene" id=10]
+[ext_resource path="res://ShapeO.tscn" type="PackedScene" id=11]
+[ext_resource path="res://BackgroundParticles.tscn" type="PackedScene" id=12]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 886.875, 159 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 177.875, 679.25 )
+
+[sub_resource type="CapsuleShape2D" id=5]
+radius = 6.49969
+height = 179.001
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 96, 18.75 )
+
+[node name="Main" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 7 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+Shapes = [ ExtResource( 2 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ) ]
+shape_force = 300
+
+[node name="Background" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.262745, 0.0509804, 0.286275, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackgroundParticles" parent="." instance=ExtResource( 12 )]
+amount = 20
+preprocess = 350.0
+speed_scale = 0.2
+
+[node name="FailZone" type="Area2D" parent="."]
+
+[node name="Bottom" type="CollisionShape2D" parent="FailZone"]
+position = Vector2( 385, 1271 )
+shape = SubResource( 1 )
+
+[node name="Left" type="CollisionShape2D" parent="FailZone"]
+position = Vector2( -536, 614 )
+shape = SubResource( 4 )
+
+[node name="Right" type="CollisionShape2D" parent="FailZone"]
+position = Vector2( 1253, 585 )
+shape = SubResource( 4 )
+
+[node name="Platform" type="StaticBody2D" parent="."]
+position = Vector2( 360, 1076 )
+scale = Vector2( 2, 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Node2D" type="Node2D" parent="Platform"]
+position = Vector2( 0, 26 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="TileYellow01" type="Sprite" parent="Platform/Node2D"]
+position = Vector2( -48, -12 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 3 )
+
+[node name="TileYellow04" type="Sprite" parent="Platform/Node2D"]
+position = Vector2( -16, -12 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 3 )
+
+[node name="TileYellow05" type="Sprite" parent="Platform/Node2D"]
+position = Vector2( 16, -12 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 3 )
+
+[node name="TileYellow06" type="Sprite" parent="Platform/Node2D"]
+position = Vector2( 48, -12 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 3 )
+
+[node name="TileYellow02" type="Sprite" parent="Platform/Node2D"]
+position = Vector2( 80, -12 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 4 )
+
+[node name="TileYellow03" type="Sprite" parent="Platform/Node2D"]
+position = Vector2( -80, -12 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 4 )
+flip_h = true
+
+[node name="Capsule" type="CollisionShape2D" parent="Platform"]
+modulate = Color( 1, 0.47451, 0.47451, 1 )
+position = Vector2( 0, 7.5 )
+rotation = 1.5708
+shape = SubResource( 5 )
+
+[node name="Rect" type="CollisionShape2D" parent="Platform"]
+position = Vector2( 0, 26.25 )
+shape = SubResource( 6 )
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="TopLine" type="Line2D" parent="UI"]
+position = Vector2( -312, 0 )
+points = PoolVector2Array( -25, 0, 1059, 0 )
+width = 1.0
+
+[node name="Label" type="Label" parent="UI/TopLine"]
+margin_left = 940.0
+margin_top = -35.0
+margin_right = 1023.0
+margin_bottom = -2.0
+theme = ExtResource( 7 )
+text = "inf"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AllTimeTopLine" type="Line2D" parent="UI"]
+position = Vector2( -312, 0 )
+points = PoolVector2Array( 0, 0, 1500, 0 )
+width = 1.0
+default_color = Color( 1, 0.4, 0.4, 1 )
+
+[node name="Label" type="Label" parent="UI/AllTimeTopLine"]
+margin_left = 940.0
+margin_top = -35.0
+margin_right = 1023.0
+margin_bottom = -2.0
+theme = ExtResource( 7 )
+text = "inf"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Splash" parent="UI" instance=ExtResource( 6 )]
+
+[connection signal="body_entered" from="FailZone" to="." method="_on_FailZone_body_entered"]
+[connection signal="begin" from="UI/Splash" to="." method="start"]
